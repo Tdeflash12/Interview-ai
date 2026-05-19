@@ -1,7 +1,7 @@
-const monggoose = require("mongoose");
+const mongoose = require("mongoose");
 
 /**
- * - job description schema: string
+  type: mongoose.Schema.Types.ObjectId,
  * - resume text:string
  * - self description: string
  * - Math Score : Number
@@ -29,7 +29,7 @@ const monggoose = require("mongoose");
  *  tasks:[String]}]
  
  */
-const interviewReportSchema = new monggoose.Schema(
+const interviewReportSchema = new mongoose.Schema(
   {
     jobDescription: { type: String, required: true },
     resumeText: { type: String, required: true },
@@ -69,13 +69,21 @@ const interviewReportSchema = new monggoose.Schema(
         tasks: [{ type: String ,required: true }],
       },
     ],
+    user:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref : 'users',
+    required: true  
+ }
   },
   { timestamps: true },
+  
 );
 
-const InterviewReportModel = monggoose.model(
+
+
+const InterviewReportModel = mongoose.model(
   "InterviewReport",
   interviewReportSchema,
 );
 
-module.exports = InterviewReport;
+module.exports = InterviewReportModel;
